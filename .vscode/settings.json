@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "sdl_test.h": "c",
+        "cmath": "c",
+        "triangle.h": "c",
+        "cstdlib": "c"
+    }
+}

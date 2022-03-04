@@ -1,0 +1,15 @@
+Draw elements
+-------------
+Point: SDL_RenderDrawPoint(renderer, x, y);
+Line: SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+
+
+Render
+------
+Clear: SDL_RenderClear(renderer);
+Color: SDL_SetRenderDrawColor(renderer, r, g, b, alpha);
+Render: SDL_RenderPresent(renderer);
+
+Shapes
+------
+Point: SDL_Point(x, y);
