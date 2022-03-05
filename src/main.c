@@ -9,8 +9,29 @@
 #include "camera.h"
 #include "pixel.h"
 
+Camera cam = {0, 0, -100};
+
 void drawAxis(SDL_Renderer* renderer, Camera cam);
 
+int compareTriangles (const void* first, const void* second) 
+{
+    Triangle f = *((Triangle*)first);
+    Triangle s = *((Triangle*)second);
+    /*printf("---------------------\n");
+    printf("avgf: %f\n", DIST(getAverage(f), cam));
+    printf("avgf: %f\n", DIST(getAverage(s), cam));*/
+    if (DIST(getAverage(f), cam) > DIST(getAverage(s), cam)) {
+        //printf("1\n");
+        return 1;
+    }
+    if (DIST(getAverage(f), cam) < DIST(getAverage(s), cam)){
+        //printf("-1\n");
+        return -1;
+    }
+    
+    //printf("0\n");
+    return 0;
+}
 
 int main(int argc, char* argv[])
 {
@@ -20,7 +41,7 @@ int main(int argc, char* argv[])
 
         if (SDL_CreateWindowAndRenderer(RESOLUTION_X, RESOLUTION_Y, 0, &window, &renderer) == 0) {
             SDL_bool done = SDL_FALSE;
-            Camera cam = {0, 0, -100};
+            
             Vertex a = {-50, -50, 50};
             Vertex b = {-50, 50, 50};
             Vertex c = {50, -50, 50};
@@ -30,6 +51,7 @@ int main(int argc, char* argv[])
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
             Screen screen = calloc(RESOLUTION_Y * RESOLUTION_X, sizeof(Pixel));
+            Triangle* mesh = calloc(8, sizeof(Triangle));
 
             while (!done) {
                 SDL_Event event;
@@ -47,8 +69,35 @@ int main(int argc, char* argv[])
                 Triangle tri6 = {b, e, f};
                 Triangle tri7 = {c, d, g};
                 Triangle tri8 = {d, g, h};
+                mesh[0] = tri1;
+                mesh[1] = tri2;
+                mesh[2] = tri3;
+                mesh[3] = tri4;
+                mesh[4] = tri5;
+                mesh[5] = tri6;
+                mesh[6] = tri7;
+                mesh[7] = tri8;
 
-                drawTriangle(renderer, tri1, cam, &screen);
+                printf("1111111111111\n");
+                for (size_t i = 0; i < 8; i++)
+                {
+                    printf("avgf: %f\n", DIST(getAverage(mesh[i]), cam));
+                    /*drawTriangle(renderer, mesh[i], cam, &screen);
+                    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);*/
+                }
+                
+                qsort(mesh, 8, sizeof(Triangle), compareTriangles);
+
+                printf("222222222222222\n");
+                for (size_t i = 0; i < 8; i++)
+                {
+                    printf("avgf: %f\n", DIST(getAverage(mesh[7-i]), cam));
+                    drawTriangle(renderer, mesh[7-i], cam, &screen);
+                    SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
+                }
+                
+
+                /*drawTriangle(renderer, tri1, cam, &screen);
                 drawTriangle(renderer, tri2, cam, &screen);
                 
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
@@ -64,7 +113,7 @@ int main(int argc, char* argv[])
                 SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
 
                 drawTriangle(renderer, tri7, cam, &screen);
-                drawTriangle(renderer, tri8, cam, &screen);
+                drawTriangle(renderer, tri8, cam, &screen);*/
 
                 rotate(&b, 0, M_PI / 10000, 0);
                 rotate(&a, 0, M_PI / 10000, 0);

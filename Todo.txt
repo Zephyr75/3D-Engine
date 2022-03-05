@@ -1,4 +1,5 @@
 Store current distance of pixel displayed and update if closer, store old color to mix
+Don't draw triangles facing away
 Create basic colors
 Create basic shapes
 Compute normals

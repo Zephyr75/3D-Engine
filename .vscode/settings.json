@@ -4,6 +4,7 @@
         "cmath": "c",
         "triangle.h": "c",
         "cstdlib": "c",
-        "pix.h": "c"
+        "pix.h": "c",
+        "camera.h": "c"
     }
 }
