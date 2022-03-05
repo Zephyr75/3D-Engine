@@ -32,6 +32,8 @@ void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera, Scre
 
     int half, full;
 
+    SDL_SetRenderDrawColor(renderer, triangle.color.r, triangle.color.g, triangle.color.b, triangle.color.a);
+
     for (size_t i = points[0].y; i < points[1].y; i++)
     {
         half = LOW(i);

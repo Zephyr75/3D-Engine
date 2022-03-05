@@ -12,6 +12,7 @@ typedef struct Triangle
     Vertex first;
     Vertex second;
     Vertex third;
+    SDL_Color color;
 } Triangle;
 
 void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera, Screen* screen);

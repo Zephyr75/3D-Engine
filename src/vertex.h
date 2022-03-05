@@ -1,9 +1,8 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-#include "SDL.h"
+#include "utilities.h"
 #include "camera.h"
-#include "constants.h"
 
 typedef struct Vertex
 {
