@@ -2,6 +2,7 @@
 #define TRIANGLE_H
 
 #include "vertex.h"
+#include "camera.h"
 
 typedef struct Triangle
 {
@@ -10,6 +11,6 @@ typedef struct Triangle
     Vertex third;
 } Triangle;
 
-void drawTriangle(SDL_Renderer* renderer, Triangle triangle);
+void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera);
 
 #endif

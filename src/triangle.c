@@ -1,6 +1,7 @@
 #include "triangle.h"
 #include "SDL.h"
 #include "vertex.h"
+#include "camera.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -27,11 +28,11 @@ int compare (const void* first, const void* second)
     return 0;
 }
 
-void drawTriangle(SDL_Renderer* renderer, Triangle triangle){
+void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
     SDL_Point* points = calloc(3, sizeof(SDL_Point));
-    points[0] = get2DCoordinates(triangle.first);
-    points[1] = get2DCoordinates(triangle.second);
-    points[2] = get2DCoordinates(triangle.third);
+    points[0] = get2DCoordinates(triangle.first, camera);
+    points[1] = get2DCoordinates(triangle.second, camera);
+    points[2] = get2DCoordinates(triangle.third, camera);
 
     qsort (points, 3, sizeof(SDL_Point), compare);
 
@@ -43,7 +44,7 @@ void drawTriangle(SDL_Renderer* renderer, Triangle triangle){
         second = FULL(i);
         SDL_RenderDrawLine(renderer, first, i, second, i);
     }
-    for (size_t i = points[1].y; i <= points[2].y; i++)
+    for (size_t i = points[1].y; i < points[2].y; i++)
     {
         first = floor(HIGH(i));
         second = floor(FULL(i));

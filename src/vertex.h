@@ -2,14 +2,15 @@
 #define VERTEX_H
 
 #include "SDL.h"
+#include "camera.h"
 
 typedef struct Vertex
 {
-    int x;
-    int y;
-    int z;
+    double x;
+    double y;
+    double z;
 } Vertex;
 
-SDL_Point get2DCoordinates(Vertex vertex);
+SDL_Point get2DCoordinates(Vertex vertex, Camera camera);
 
 #endif
