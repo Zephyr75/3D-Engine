@@ -1,6 +1,4 @@
-Store current distance of pixel displayed and update if closer, store old color to mix
 Don't draw triangles facing away
-Create basic colors
 Create basic shapes
 Compute normals
 Compute shadows using normals
@@ -9,3 +7,10 @@ Import obj objects
 Import text
 Compute reflections
 Add user interactions: add object, transform object, move camera
+
+To watch:
+1: perspective explanations
+3: custom texturing / texture warping fix
+4: edge clipping
+5: light
+6: obj file

@@ -70,14 +70,14 @@ int main(int argc, char* argv[])
                     drawTriangle(renderer, mesh[7-i], cam, &screen);
                 }
 
-                rotate(&b, 0, M_PI / 10000, 0);
-                rotate(&a, 0, M_PI / 10000, 0);
-                rotate(&c, 0, M_PI / 10000, 0);
-                rotate(&d, 0, M_PI / 10000, 0);
-                rotate(&e, 0, M_PI / 10000, 0);
-                rotate(&f, 0, M_PI / 10000, 0);
-                rotate(&g, 0, M_PI / 10000, 0);
-                rotate(&h, 0, M_PI / 10000, 0);
+                rotate(&a, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&b, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&c, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&d, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&e, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&f, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&g, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&h, M_PI / 10000, M_PI / 10000, 0);
 
                 drawAxis(renderer, cam);
 
@@ -103,27 +103,30 @@ int main(int argc, char* argv[])
 }
 
 void drawAxis(SDL_Renderer* renderer, Camera cam){
-    SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
-                Vertex x1_1 = {-100, 0, 0};
-                Vertex x2_1 = {100, 0, 0};
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
+                Vertex x1_1 = {-200, 0, 0};
+                Vertex x2_1 = {200, 0, 0};
                 SDL_Point x1 = get2DCoordinates(x1_1, cam);
                 SDL_Point x2 = get2DCoordinates(x2_1, cam);
                 SDL_RenderDrawLine(renderer, x1.x, x1.y, x2.x, x2.y);
 
-                SDL_SetRenderDrawColor(renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
-                Vertex y1_1 = {0, -100, 0};
-                Vertex y2_1 = {0, 100, 0};
+                SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+                Vertex y1_1 = {0, -200, 0};
+                Vertex y2_1 = {0, 200, 0};
                 SDL_Point y1 = get2DCoordinates(y1_1, cam);
                 SDL_Point y2 = get2DCoordinates(y2_1, cam);
                 SDL_RenderDrawLine(renderer, y1.x, y1.y, y2.x, y2.y);
 
-                SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
-                Vertex z1_1 = {0, 0, -100};
-                Vertex z2_1 = {0, 0, 100};
+                SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
+                Vertex z1_1 = {0, 0, -200};
+                Vertex z2_1 = {0, 0, 200};
                 SDL_Point z1 = get2DCoordinates(z1_1, cam);
                 SDL_Point z2 = get2DCoordinates(z2_1, cam);
                 SDL_RenderDrawLine(renderer, z1.x, z1.y, z2.x, z2.y);
 }
 
-//gcc .\src\main.c .\src\vertex.c .\src\triangle.c .\src\constants.c .\src\transform.c .\src\camera.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
-//bin/prog.exe
+
+/*
+gcc .\src\main.c .\src\vertex.c .\src\triangle.c .\src\constants.c .\src\transform.c .\src\camera.c .\src\pixel.c src/color.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
+bin/prog.exe
+*/
