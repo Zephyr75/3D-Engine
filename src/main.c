@@ -16,11 +16,15 @@ int main(int argc, char* argv[])
 
         if (SDL_CreateWindowAndRenderer(RESOLUTION_X, RESOLUTION_Y, 0, &window, &renderer) == 0) {
             SDL_bool done = SDL_FALSE;
-            Camera cam = {0, 0, -100};
-            Vertex a = {-100, -100, 5};
-            Vertex b = {-100, 100, 5};
-            Vertex c = {100, -100, 10};
-            Vertex d = {100, 100, 10};
+            Camera cam = {0, 0, -70};
+            Vertex a = {-25, -25, 25};
+            Vertex b = {-25, 25, 25};
+            Vertex c = {25, -25, 25};
+            Vertex d = {25, 25, 25};
+            Vertex e = {-25, -25, -25};
+            Vertex f = {-25, 25, -25};
+            Vertex g = {25, -25, -25};
+            Vertex h = {25, 25, -25};
 
             while (!done) {
                 SDL_Event event;
@@ -30,44 +34,46 @@ int main(int argc, char* argv[])
 
                 SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
                 
-                /*Vertex a = {0, 0, 5};
-                Vertex b = {0, 100, 5};
-                Vertex c = {100, 100, 5};
-                Vertex d = {100, 0, 5};
-                Vertex e = {0, 0, 10};
-                Vertex f = {0, 100, 10};
-                Vertex g = {100, 100, 10};
-                Vertex h = {100, 0, 10};
-
-                Triangle tri1 = {a, b, d};
+                Triangle tri1 = {a, b, c};
                 Triangle tri2 = {b, c, d};
-                Triangle tri3 = {e, f, h};
-                Triangle tri4 = {f, g, h};*/
+                Triangle tri3 = {e, f, g};
+                Triangle tri4 = {f, g, h};
+                Triangle tri5 = {a, b, e};
+                Triangle tri6 = {b, e, f};
+                Triangle tri7 = {c, d, g};
+                Triangle tri8 = {d, g, h};
 
-                //drawTriangle(renderer, tri1);
-                //drawTriangle(renderer, tri2);
-                /*drawTriangle(renderer, tri3);
-                drawTriangle(renderer, tri4);*/
+                drawTriangle(renderer, tri1, cam);
+                drawTriangle(renderer, tri2, cam);
                 
-                /*rotate(&c, M_PI / 10000, 0, 0);
-                rotate(&a, M_PI / 10000, 0, 0);
-                rotate(&b, M_PI / 10000, 0, 0);
-                rotate(&d, M_PI / 10000, 0, 0);*/
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
-                rotate(&c, 0, M_PI / 10000, 0);
+                drawTriangle(renderer, tri3, cam);
+                drawTriangle(renderer, tri4, cam);
+                
+                SDL_SetRenderDrawColor(renderer, 255, 0, 255, SDL_ALPHA_OPAQUE);
+
+                drawTriangle(renderer, tri5, cam);
+                drawTriangle(renderer, tri6, cam);
+
+                SDL_SetRenderDrawColor(renderer, 255, 255, 0, SDL_ALPHA_OPAQUE);
+
+                drawTriangle(renderer, tri7, cam);
+                drawTriangle(renderer, tri8, cam);
+
                 rotate(&a, 0, M_PI / 10000, 0);
                 rotate(&b, 0, M_PI / 10000, 0);
+                rotate(&c, 0, M_PI / 10000, 0);
                 rotate(&d, 0, M_PI / 10000, 0);
+                rotate(&e, 0, M_PI / 10000, 0);
+                rotate(&f, 0, M_PI / 10000, 0);
+                rotate(&g, 0, M_PI / 10000, 0);
+                rotate(&h, 0, M_PI / 10000, 0);
 
                 /*rotate(&c, 0, 0, M_PI / 10000);
                 rotate(&a, 0, 0, M_PI / 10000);
                 rotate(&b, 0, 0, M_PI / 10000);
                 rotate(&d, 0, 0, M_PI / 10000);*/
-                
-                Triangle tri1 = {a, b, c};
-                Triangle tri2 = {b, c, d};
-                drawTriangle(renderer, tri1, cam);
-                drawTriangle(renderer, tri2, cam);
 
 
                 /*SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);

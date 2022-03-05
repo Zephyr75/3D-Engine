@@ -42,14 +42,18 @@ void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
     {
         first = LOW(i);
         second = FULL(i);
-        SDL_RenderDrawLine(renderer, first, i, second, i);
+        //SDL_RenderDrawLine(renderer, first, i, second, i);
     }
     for (size_t i = points[1].y; i < points[2].y; i++)
     {
         first = floor(HIGH(i));
         second = floor(FULL(i));
-        SDL_RenderDrawLine(renderer, first, i, second, i);
+        //SDL_RenderDrawLine(renderer, first, i, second, i);
     }
+
+    SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[1].x, points[1].y);
+    SDL_RenderDrawLine(renderer, points[2].x, points[2].y, points[1].x, points[1].y);
+    SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[2].x, points[2].y);
     
     free(points);
 }
