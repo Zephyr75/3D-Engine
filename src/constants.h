@@ -6,6 +6,6 @@
 const float FOV;
 const int RESOLUTION_X;
 const int RESOLUTION_Y;
-const double CAM_TO_SCREEN;
+double camToScreen();
 
 #endif

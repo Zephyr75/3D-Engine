@@ -3,6 +3,10 @@
 
 #include "vertex.h"
 #include "camera.h"
+#include "SDL.h"
+#include <stdio.h>
+#include <math.h>
+#include "pixel.h"
 
 typedef struct Triangle
 {
@@ -11,6 +15,6 @@ typedef struct Triangle
     Vertex third;
 } Triangle;
 
-void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera);
+void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera, Screen* screen);
 
 #endif
