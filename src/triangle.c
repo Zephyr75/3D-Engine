@@ -24,9 +24,9 @@ int compare (const void* first, const void* second)
 
 void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
     SDL_Point* points = calloc(3, sizeof(SDL_Point));
-    points[0] = get2DCoordinates(triangle.first, camera);
-    points[1] = get2DCoordinates(triangle.second, camera);
-    points[2] = get2DCoordinates(triangle.third, camera);
+    points[0] = get2DCoordinates(*triangle.first, camera);
+    points[1] = get2DCoordinates(*triangle.second, camera);
+    points[2] = get2DCoordinates(*triangle.third, camera);
 
     qsort(points, 3, sizeof(SDL_Point), compare);
 
@@ -52,9 +52,9 @@ void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
 
 void drawWireframeTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
     SDL_Point* points = calloc(3, sizeof(SDL_Point));
-    points[0] = get2DCoordinates(triangle.first, camera);
-    points[1] = get2DCoordinates(triangle.second, camera);
-    points[2] = get2DCoordinates(triangle.third, camera);
+    points[0] = get2DCoordinates(*triangle.first, camera);
+    points[1] = get2DCoordinates(*triangle.second, camera);
+    points[2] = get2DCoordinates(*triangle.third, camera);
     
     SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[1].x, points[1].y);
     SDL_RenderDrawLine(renderer, points[2].x, points[2].y, points[1].x, points[1].y);
@@ -64,8 +64,8 @@ void drawWireframeTriangle(SDL_Renderer* renderer, Triangle triangle, Camera cam
 
 Vertex getAverage(Triangle triangle){
     Vertex result;
-    result.x = (triangle.first.x + triangle.second.x + triangle.third.x) / 3;
-    result.y = (triangle.first.y + triangle.second.y + triangle.third.y) / 3;
-    result.z = (triangle.first.z + triangle.second.z + triangle.third.z) / 3;
+    result.x = (triangle.first->x + triangle.second->x + triangle.third->x) / 3;
+    result.y = (triangle.first->y + triangle.second->y + triangle.third->y) / 3;
+    result.z = (triangle.first->z + triangle.second->z + triangle.third->z) / 3;
     return result;
 }

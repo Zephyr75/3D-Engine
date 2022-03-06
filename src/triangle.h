@@ -8,9 +8,10 @@
 
 typedef struct Triangle
 {
-    Vertex first;
-    Vertex second;
-    Vertex third;
+    Vertex* first;
+    Vertex* second;
+    Vertex* third;
+    SDL_Color baseColor;
     SDL_Color color;
 } Triangle;
 

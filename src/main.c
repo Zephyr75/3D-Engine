@@ -38,7 +38,23 @@ int main(int argc, char* argv[])
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
             Triangle* mesh = calloc(8, sizeof(Triangle));
-            Light light = {0, 50, 0, 100, whiteColor()};
+            Triangle tri1 = {&a, &b, &c, blackColor(), blackColor()};
+            Triangle tri2 = {&b, &c, &d, blackColor(), blackColor()};
+            Triangle tri3 = {&e, &f, &g, blackColor(), blackColor()};
+            Triangle tri4 = {&f, &g, &h, blackColor(), blackColor()};
+            Triangle tri5 = {&a, &b, &e, blackColor(), blackColor()};
+            Triangle tri6 = {&b, &e, &f, blackColor(), blackColor()};
+            Triangle tri7 = {&c, &d, &g, blackColor(), blackColor()};
+            Triangle tri8 = {&d, &g, &h, blackColor(), blackColor()};
+            mesh[0] = tri1;
+            mesh[1] = tri2;
+            mesh[2] = tri3;
+            mesh[3] = tri4;
+            mesh[4] = tri5;
+            mesh[5] = tri6;
+            mesh[6] = tri7;
+            mesh[7] = tri8;
+            Light light = {-60, 0, 0, 100, whiteColor()};
 
             while (!done) {
                 SDL_Event event;
@@ -50,22 +66,7 @@ int main(int argc, char* argv[])
 
                 SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
                 
-                Triangle tri1 = {a, b, c, magentaColor()};
-                Triangle tri2 = {b, c, d, magentaColor()};
-                Triangle tri3 = {e, f, g, yellowColor()};
-                Triangle tri4 = {f, g, h, yellowColor()};
-                Triangle tri5 = {a, b, e, cyanColor()};
-                Triangle tri6 = {b, e, f, cyanColor()};
-                Triangle tri7 = {c, d, g, whiteColor()};
-                Triangle tri8 = {d, g, h, whiteColor()};
-                mesh[0] = tri1;
-                mesh[1] = tri2;
-                mesh[2] = tri3;
-                mesh[3] = tri4;
-                mesh[4] = tri5;
-                mesh[5] = tri6;
-                mesh[6] = tri7;
-                mesh[7] = tri8;
+                
                 
                 qsort(mesh, 8, sizeof(Triangle), compareTriangles);
 
