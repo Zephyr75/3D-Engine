@@ -4,6 +4,8 @@
 #include "triangle.h"
 #include "transform.h"
 #include "camera.h"
+#include "color.h"
+#include "light.h"
 
 Camera cam = {0, 0, -100};
 
@@ -36,12 +38,15 @@ int main(int argc, char* argv[])
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
             Triangle* mesh = calloc(8, sizeof(Triangle));
+            Light light = {0, 50, 0, 100, whiteColor()};
 
             while (!done) {
                 SDL_Event event;
 
                 SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
                 SDL_RenderClear(renderer);
+
+                SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
                 SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
                 
@@ -63,19 +68,22 @@ int main(int argc, char* argv[])
                 mesh[7] = tri8;
                 
                 qsort(mesh, 8, sizeof(Triangle), compareTriangles);
+
+                computeLight(light, mesh);
+
                 for (size_t i = 0; i < 8; i++)
                 {
                     drawTriangle(renderer, mesh[7-i], cam);
                 }
 
-                rotate(&a, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&b, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&c, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&d, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&e, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&f, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&g, M_PI / 10000, M_PI / 10000, 0);
-                rotate(&h, M_PI / 10000, M_PI / 10000, 0);
+                rotate(&a, 0, M_PI / 1000, 0);
+                rotate(&b, 0, M_PI / 1000, 0);
+                rotate(&c, 0, M_PI / 1000, 0);
+                rotate(&d, 0, M_PI / 1000, 0);
+                rotate(&e, 0, M_PI / 1000, 0);
+                rotate(&f, 0, M_PI / 1000, 0);
+                rotate(&g, 0, M_PI / 1000, 0);
+                rotate(&h, 0, M_PI / 1000, 0);
 
                 drawAxis(renderer, cam);
 

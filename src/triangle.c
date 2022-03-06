@@ -46,13 +46,19 @@ void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
         full = FULL(i);
         SDL_RenderDrawLine(renderer, half, i, full, i);
     }
-    /*SDL_RenderDrawPoint(renderer, points[0].x, points[0].y);
-    SDL_RenderDrawPoint(renderer, points[1].x, points[1].y);
-    SDL_RenderDrawPoint(renderer, points[2].x, points[2].y);*/
-    /*SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[1].x, points[1].y);
-    SDL_RenderDrawLine(renderer, points[2].x, points[2].y, points[1].x, points[1].y);
-    SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[2].x, points[2].y);*/
     
+    free(points);
+}
+
+void drawWireframeTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
+    SDL_Point* points = calloc(3, sizeof(SDL_Point));
+    points[0] = get2DCoordinates(triangle.first, camera);
+    points[1] = get2DCoordinates(triangle.second, camera);
+    points[2] = get2DCoordinates(triangle.third, camera);
+    
+    SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[1].x, points[1].y);
+    SDL_RenderDrawLine(renderer, points[2].x, points[2].y, points[1].x, points[1].y);
+    SDL_RenderDrawLine(renderer, points[0].x, points[0].y, points[2].x, points[2].y);
     free(points);
 }
 

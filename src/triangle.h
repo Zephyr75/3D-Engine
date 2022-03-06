@@ -16,6 +16,8 @@ typedef struct Triangle
 
 void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera);
 
+void drawWireframeTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera);
+
 Vertex getAverage(Triangle triangle);
 
 #endif
