@@ -1,8 +1,15 @@
+Initialization
+--------------
+Initialize SDL: SDL_Init(SDL_INIT_VIDEO);
+Initialize window and renderer: SDL_CreateWindowAndRenderer(resolutionX, resolutionY, windowFlags, window, renderer);
+Destroy window: SDL_DestroyWindow(window);
+Destroy renderer: SDL_DestroyRenderer(renderer);
+Exit SDL: SDL_Quit();
+
 Draw elements
 -------------
 Point: SDL_RenderDrawPoint(renderer, x, y);
 Line: SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
-
 
 Render
 ------

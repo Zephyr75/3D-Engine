@@ -5,6 +5,11 @@ SDL_Color whiteColor(){
     return result;
 }
 
+SDL_Color blackColor(){
+    SDL_Color result = {0, 0, 0, 255};
+    return result;
+}
+
 SDL_Color redColor(){
     SDL_Color result = {255, 0, 0, 255};
     return result;

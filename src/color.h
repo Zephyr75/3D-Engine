@@ -4,6 +4,7 @@
 #include "utilities.h"
 
 SDL_Color whiteColor();
+SDL_Color blackColor();
 SDL_Color redColor();
 SDL_Color greenColor();
 SDL_Color blueColor();
