@@ -22,7 +22,7 @@ int compare (const void* first, const void* second)
     return 0;
 }
 
-void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera, Screen* screen){
+void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
     SDL_Point* points = calloc(3, sizeof(SDL_Point));
     points[0] = get2DCoordinates(triangle.first, camera);
     points[1] = get2DCoordinates(triangle.second, camera);

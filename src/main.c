@@ -4,7 +4,6 @@
 #include "triangle.h"
 #include "transform.h"
 #include "camera.h"
-#include "pixel.h"
 
 Camera cam = {0, 0, -100};
 
@@ -36,7 +35,6 @@ int main(int argc, char* argv[])
             Vertex f = {-50, 50, -50};
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
-            Screen screen = calloc(RESOLUTION_Y * RESOLUTION_X, sizeof(Pixel));
             Triangle* mesh = calloc(8, sizeof(Triangle));
 
             while (!done) {
@@ -67,7 +65,7 @@ int main(int argc, char* argv[])
                 qsort(mesh, 8, sizeof(Triangle), compareTriangles);
                 for (size_t i = 0; i < 8; i++)
                 {
-                    drawTriangle(renderer, mesh[7-i], cam, &screen);
+                    drawTriangle(renderer, mesh[7-i], cam);
                 }
 
                 rotate(&a, M_PI / 10000, M_PI / 10000, 0);
@@ -127,6 +125,7 @@ void drawAxis(SDL_Renderer* renderer, Camera cam){
 
 
 /*
-gcc .\src\main.c .\src\vertex.c .\src\triangle.c .\src\constants.c .\src\transform.c .\src\camera.c .\src\pixel.c src/color.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
+gcc .\src\main.c .\src\vertex.c .\src\triangle.c .\src\constants.c .\src\transform.c .\src\camera.c src/color.c .\src\vector.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
+
 bin/prog.exe
 */

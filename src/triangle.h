@@ -3,7 +3,6 @@
 
 #include "vertex.h"
 #include "camera.h"
-#include "pixel.h"
 
 #include "utilities.h"
 
@@ -15,7 +14,7 @@ typedef struct Triangle
     SDL_Color color;
 } Triangle;
 
-void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera, Screen* screen);
+void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera);
 
 Vertex getAverage(Triangle triangle);
 
