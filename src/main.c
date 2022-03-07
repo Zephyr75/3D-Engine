@@ -15,8 +15,8 @@ int compareTriangles (const void* first, const void* second)
 {
     Triangle f = *((Triangle*)first);
     Triangle s = *((Triangle*)second);
-    if (DIST(getAverage(f), cam) > DIST(getAverage(s), cam)) return 1;
-    if (DIST(getAverage(f), cam) < DIST(getAverage(s), cam)) return -1;
+    if (DIST_3D(getAverage(f), cam) > DIST_3D(getAverage(s), cam)) return 1;
+    if (DIST_3D(getAverage(f), cam) < DIST_3D(getAverage(s), cam)) return -1;
     return 0;
 }
 
