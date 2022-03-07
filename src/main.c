@@ -38,14 +38,14 @@ int main(int argc, char* argv[])
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
             Triangle* mesh = calloc(8, sizeof(Triangle));
-            Triangle tri1 = {&a, &b, &c, blackColor(), blackColor()};
-            Triangle tri2 = {&b, &c, &d, blackColor(), blackColor()};
-            Triangle tri3 = {&e, &f, &g, blackColor(), blackColor()};
-            Triangle tri4 = {&f, &g, &h, blackColor(), blackColor()};
-            Triangle tri5 = {&a, &b, &e, blackColor(), blackColor()};
-            Triangle tri6 = {&b, &e, &f, blackColor(), blackColor()};
-            Triangle tri7 = {&c, &d, &g, blackColor(), blackColor()};
-            Triangle tri8 = {&d, &g, &h, blackColor(), blackColor()};
+            Triangle tri1 = {&a, &b, &c, redColor(), redColor()};
+            Triangle tri2 = {&b, &c, &d, redColor(), redColor()};
+            Triangle tri3 = {&e, &f, &g, redColor(), redColor()};
+            Triangle tri4 = {&f, &g, &h, redColor(), redColor()};
+            Triangle tri5 = {&a, &b, &e, redColor(), redColor()};
+            Triangle tri6 = {&b, &e, &f, redColor(), redColor()};
+            Triangle tri7 = {&c, &d, &g, redColor(), redColor()};
+            Triangle tri8 = {&d, &g, &h, redColor(), redColor()};
             mesh[0] = tri1;
             mesh[1] = tri2;
             mesh[2] = tri3;
@@ -59,7 +59,8 @@ int main(int argc, char* argv[])
             while (!done) {
                 SDL_Event event;
 
-                SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+                SDL_SetRenderDrawColor(renderer, 50, 50, 50, SDL_ALPHA_OPAQUE);
+
                 SDL_RenderClear(renderer);
 
                 SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
