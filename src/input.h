@@ -2,4 +2,4 @@
 #include "utilities.h"
 #include "mesh.h"
 
-void readObj(char* fileName);
+Mesh* readObj(char* fileName);

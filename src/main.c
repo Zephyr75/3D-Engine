@@ -23,8 +23,6 @@ int compareTriangles (const void* first, const void* second)
 
 int main(int argc, char* argv[])
 {
-    readObj("resources/suzanne.obj");
-
     if (SDL_Init(SDL_INIT_VIDEO) == 0) {
         SDL_Window* window = NULL;
         SDL_Renderer* renderer = NULL;
@@ -40,7 +38,6 @@ int main(int argc, char* argv[])
             Vertex f = {-50, 50, -50};
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
-            Mesh mesh;
             Triangle tri1 = {&a, &b, &c, redColor(), redColor()};
             Triangle tri2 = {&b, &c, &d, redColor(), redColor()};
             Triangle tri3 = {&e, &f, &g, redColor(), redColor()};
@@ -49,16 +46,19 @@ int main(int argc, char* argv[])
             Triangle tri6 = {&b, &e, &f, redColor(), redColor()};
             Triangle tri7 = {&c, &d, &g, redColor(), redColor()};
             Triangle tri8 = {&d, &g, &h, redColor(), redColor()};
-            mesh.faces = calloc(8, sizeof(Triangle));
-            mesh.faces[0] = tri1;
-            mesh.faces[1] = tri2;
-            mesh.faces[2] = tri3;
-            mesh.faces[3] = tri4;
-            mesh.faces[4] = tri5;
-            mesh.faces[5] = tri6;
-            mesh.faces[6] = tri7;
-            mesh.faces[7] = tri8;
-            mesh.length = 8;
+            Mesh* mesh;
+            mesh->faces = calloc(8, sizeof(Triangle));
+            mesh->faces[0] = tri1;
+            mesh->faces[1] = tri2;
+            mesh->faces[2] = tri3;
+            mesh->faces[3] = tri4;
+            mesh->faces[4] = tri5;
+            mesh->faces[5] = tri6;
+            mesh->faces[6] = tri7;
+            mesh->faces[7] = tri8;
+            mesh->length = 8;
+            Mesh* mesh2 = readObj("resources/suzanne.obj");
+
             Light light = {-60, 0, 0, 100, whiteColor()};
             //SDL_Surface* surface = IMG_Load("resources/brick.jpg");
 
@@ -73,14 +73,14 @@ int main(int argc, char* argv[])
 
 
                 SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
-                
-                
-                
-                qsort(mesh.faces, 8, sizeof(Triangle), compareTriangles);
 
-                computeLight(light, &mesh);
-
-                drawMesh(renderer, &mesh, cam);
+                qsort(mesh->faces, mesh->length, sizeof(Triangle), compareTriangles);
+                computeLight(light, mesh);
+                drawMesh(renderer, mesh, cam);
+                
+                qsort(mesh2->faces, mesh2->length, sizeof(Triangle), compareTriangles);
+                computeLight(light, mesh2);
+                drawMesh(renderer, mesh2, cam);
 
                 rotate(&a, M_PI / 1000, M_PI / 1000, 0);
                 rotate(&b, M_PI / 1000, M_PI / 1000, 0);
