@@ -1,7 +1,6 @@
 #include "input.h"
 
-static char** _strsplit( const char* s, const char* delim, size_t* nb );
-char** strsplit( const char* s, const char* delim );
+char* getVertex(char* full);
 
 Mesh* readObj(char* fileName){
     FILE* objFile;
@@ -16,7 +15,6 @@ Mesh* readObj(char* fileName){
     Triangle* triangles = malloc(sizeof(Triangle));
 
     while(fgets(line, 255, objFile) != NULL){
-        //printf("%s\n", line);
         char *token;
         token = strtok(line, " ");
         SDL_bool isVertex = (strcmp(token, "v") == 0);
@@ -32,11 +30,11 @@ Mesh* readObj(char* fileName){
                 if (i == 3) z = strtod(token, NULL);
             }
             if (isFace) {
-                char** index = strsplit(token, "/");
-                if (i == 1) first = atoi(index[0]);
-                if (i == 2) second = atoi(index[0]);
-                if (i == 3) third = atoi(index[0]);
-                printf("%d\n", atoi(index[0]));
+                char* index = getVertex(token);
+                if (i == 1) first = atoi(index);
+                if (i == 2) second = atoi(index);
+                if (i == 3) third = atoi(index);
+                printf("%d\n", atoi(index));
             }
             token = strtok(NULL, " ");
             i++;
@@ -57,22 +55,7 @@ Mesh* readObj(char* fileName){
             triangle.third = &vertices[third - 1];
             triangles[nbrFaces - 1] = triangle;
         }
-        
     }
-
-    /*for (size_t i = 0; i < nbrVertices; i++)
-    {
-        printf("------------------------\n");
-        printf("first: %f, %f, %f\n", vertices[i].x, vertices[i].y, vertices[i].z);
-    }
-
-    for (size_t i = 0; i < nbrFaces; i++)
-    {
-        printf("------------------------\n");
-        printf("first: %f, %f, %f\n", triangles[i].first->x, triangles[i].first->y, triangles[i].first->z);
-        printf("second: %f, %f, %f\n", triangles[i].second->x, triangles[i].second->y, triangles[i].second->z);
-        printf("third: %f, %f, %f\n", triangles[i].third->x, triangles[i].third->y, triangles[i].third->z);
-    }*/
 
     Mesh* result = malloc(sizeof(Mesh));
     result->faces = triangles;
@@ -81,41 +64,13 @@ Mesh* readObj(char* fileName){
 
 }
 
-static char** _strsplit( const char* s, const char* delim, size_t* nb ) {
-	void* data;
-	char* _s = ( char* )s;
-	const char** ptrs;
-	size_t
-		ptrsSize,
-		nbWords = 1,
-		sLen = strlen( s ),
-		delimLen = strlen( delim );
-
-	while ( ( _s = strstr( _s, delim ) ) ) {
-		_s += delimLen;
-		++nbWords;
-	}
-	ptrsSize = ( nbWords + 1 ) * sizeof( char* );
-	ptrs =
-	data = malloc( ptrsSize + sLen + 1 );
-	if ( data ) {
-		*ptrs =
-		_s = strcpy( ( ( char* )data ) + ptrsSize, s );
-		if ( nbWords > 1 ) {
-			while ( ( _s = strstr( _s, delim ) ) ) {
-				*_s = '\0';
-				_s += delimLen;
-				*++ptrs = _s;
-			}
-		}
-		*++ptrs = NULL;
-	}
-	if ( nb ) {
-		*nb = data ? nbWords : 0;
-	}
-	return data;
-}
-
-char** strsplit( const char* s, const char* delim ) {
-	return _strsplit( s, delim, NULL );
+char* getVertex(char* full){
+    char* result = malloc(1);
+    for (size_t i = 0; i < sizeof(full); i++)
+    {
+        result = realloc(result, i + 1);
+        if (strcmp(&full[i], "/") == 0) break;
+        result[i] = full[i];
+    }
+    return result;
 }
