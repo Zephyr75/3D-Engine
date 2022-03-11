@@ -3,6 +3,7 @@
 
 #include "utilities.h"
 #include "triangle.h"
+#include "mesh.h"
 
 typedef struct Light
 {
@@ -13,6 +14,6 @@ typedef struct Light
     SDL_Color color;
 } Light;
 
-void computeLight(Light light, Triangle* mesh);
+void computeLight(Light light, Mesh* mesh);
 
 #endif

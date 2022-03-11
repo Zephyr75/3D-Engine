@@ -5,6 +5,9 @@
         "triangle.h": "c",
         "cstdlib": "c",
         "pix.h": "c",
-        "camera.h": "c"
+        "camera.h": "c",
+        "utilities.h": "c",
+        "sdl.h": "c",
+        "sdl_surface.h": "c"
     }
 }

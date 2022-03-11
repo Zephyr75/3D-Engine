@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "color.h"
 #include "light.h"
+#include "input.h"
 
 Camera cam = {0, 0, -100};
 
@@ -22,6 +23,8 @@ int compareTriangles (const void* first, const void* second)
 
 int main(int argc, char* argv[])
 {
+    readObj("resources/suzanne.obj");
+
     if (SDL_Init(SDL_INIT_VIDEO) == 0) {
         SDL_Window* window = NULL;
         SDL_Renderer* renderer = NULL;
@@ -37,7 +40,7 @@ int main(int argc, char* argv[])
             Vertex f = {-50, 50, -50};
             Vertex g = {50, -50, -50};
             Vertex h = {50, 50, -50};
-            Triangle* mesh = calloc(8, sizeof(Triangle));
+            Mesh mesh;
             Triangle tri1 = {&a, &b, &c, redColor(), redColor()};
             Triangle tri2 = {&b, &c, &d, redColor(), redColor()};
             Triangle tri3 = {&e, &f, &g, redColor(), redColor()};
@@ -46,15 +49,18 @@ int main(int argc, char* argv[])
             Triangle tri6 = {&b, &e, &f, redColor(), redColor()};
             Triangle tri7 = {&c, &d, &g, redColor(), redColor()};
             Triangle tri8 = {&d, &g, &h, redColor(), redColor()};
-            mesh[0] = tri1;
-            mesh[1] = tri2;
-            mesh[2] = tri3;
-            mesh[3] = tri4;
-            mesh[4] = tri5;
-            mesh[5] = tri6;
-            mesh[6] = tri7;
-            mesh[7] = tri8;
+            mesh.faces = calloc(8, sizeof(Triangle));
+            mesh.faces[0] = tri1;
+            mesh.faces[1] = tri2;
+            mesh.faces[2] = tri3;
+            mesh.faces[3] = tri4;
+            mesh.faces[4] = tri5;
+            mesh.faces[5] = tri6;
+            mesh.faces[6] = tri7;
+            mesh.faces[7] = tri8;
+            mesh.length = 8;
             Light light = {-60, 0, 0, 100, whiteColor()};
+            //SDL_Surface* surface = IMG_Load("resources/brick.jpg");
 
             while (!done) {
                 SDL_Event event;
@@ -65,27 +71,25 @@ int main(int argc, char* argv[])
 
                 SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
+
                 SDL_SetRenderDrawColor(renderer, 0, 255, 255, SDL_ALPHA_OPAQUE);
                 
                 
                 
-                qsort(mesh, 8, sizeof(Triangle), compareTriangles);
+                qsort(mesh.faces, 8, sizeof(Triangle), compareTriangles);
 
-                computeLight(light, mesh);
+                computeLight(light, &mesh);
 
-                for (size_t i = 0; i < 8; i++)
-                {
-                    drawTriangle(renderer, mesh[7-i], cam);
-                }
+                drawMesh(renderer, &mesh, cam);
 
-                rotate(&a, 0, M_PI / 1000, 0);
-                rotate(&b, 0, M_PI / 1000, 0);
-                rotate(&c, 0, M_PI / 1000, 0);
-                rotate(&d, 0, M_PI / 1000, 0);
-                rotate(&e, 0, M_PI / 1000, 0);
-                rotate(&f, 0, M_PI / 1000, 0);
-                rotate(&g, 0, M_PI / 1000, 0);
-                rotate(&h, 0, M_PI / 1000, 0);
+                rotate(&a, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&b, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&c, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&d, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&e, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&f, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&g, M_PI / 1000, M_PI / 1000, 0);
+                rotate(&h, M_PI / 1000, M_PI / 1000, 0);
 
                 drawAxis(renderer, cam);
 
@@ -135,7 +139,9 @@ void drawAxis(SDL_Renderer* renderer, Camera cam){
 
 
 /*
-gcc .\src\main.c .\src\vertex.c .\src\triangle.c .\src\constants.c .\src\transform.c .\src\camera.c src/color.c .\src\vector.c -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2
+gcc .\src\main.c .\src\vertex.c .\src\triangle.c .\src\constants.c .\src\transform.c .\src\camera.c src/color.c .\src\vector.c .\src\light.c .\src\input.c .\src\mesh.c  -o bin/prog -I include -L lib -lmingw32 -lSDL2main -lSDL2 -g
 
 bin/prog.exe
+
+gdb bin/prog.exe
 */

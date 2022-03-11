@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #include "constants.h"
 
 #define MIN(a, b) ((a < b) ? a : b)
