@@ -10,7 +10,7 @@ Mesh* readObj(char* fileName){
     char line[255];
     
     int nbrVertices = 0;
-    int nbrFaces = 0;
+    int nbrTriangles = 0;
     Vertex* vertices = malloc(sizeof(Vertex));
     Triangle* triangles = malloc(sizeof(Triangle));
 
@@ -34,7 +34,7 @@ Mesh* readObj(char* fileName){
                 if (i == 1) first = atoi(index);
                 if (i == 2) second = atoi(index);
                 if (i == 3) third = atoi(index);
-                printf("%d\n", atoi(index));
+                //printf("%d\n", atoi(index));
             }
             token = strtok(NULL, " ");
             i++;
@@ -45,21 +45,24 @@ Mesh* readObj(char* fileName){
             vertex.x = x;
             vertex.y = y;
             vertex.z = z;
+            vertex.baseColor = redColor();
             vertices[nbrVertices - 1] = vertex;
         }
         if (isFace){
-            nbrFaces++;
-            triangles = realloc(triangles, nbrFaces * sizeof(Triangle));
+            nbrTriangles++;
+            triangles = realloc(triangles, nbrTriangles * sizeof(Triangle));
             triangle.first = &vertices[first - 1];
             triangle.second = &vertices[second - 1];
             triangle.third = &vertices[third - 1];
-            triangles[nbrFaces - 1] = triangle;
+            triangles[nbrTriangles - 1] = triangle;
         }
     }
 
     Mesh* result = malloc(sizeof(Mesh));
-    result->faces = triangles;
-    result->length = nbrFaces;
+    result->triangles = triangles;
+    result->vertices = vertices;
+    result->trianglesCount = nbrTriangles;
+    result->verticesCount = nbrVertices;
     return result;
 
 }

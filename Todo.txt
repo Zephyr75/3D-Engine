@@ -14,3 +14,5 @@ To watch:
 4: edge clipping
 5: light
 6: obj file
+
+Fix number of vertices per summit inconsistent

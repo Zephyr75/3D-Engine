@@ -6,10 +6,14 @@
 
 typedef struct Mesh
 {
-    Triangle* faces;
-    int length;
+    Triangle* triangles;
+    Vertex* vertices;
+    int trianglesCount;
+    int verticesCount;
 } Mesh;
 
 void drawMesh(SDL_Renderer* renderer, Mesh* mesh, Camera camera);
+
+void clearMesh(Mesh* mesh);
 
 #endif

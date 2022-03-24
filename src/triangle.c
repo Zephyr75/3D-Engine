@@ -16,7 +16,7 @@ double function(double y, SDL_Point first, SDL_Point second)
     double fY = (double) first.y;
     double sX = (double) second.x;
     double sY = (double) second.y;
-    return fX + (sX - fX) * ABS((fY - y)/(fY - sY));
+    return fX + (sX - fX) * fabs((fY - y)/(fY - sY));
 }
 
 int compare (const void* first, const void* second) 
@@ -109,6 +109,10 @@ void drawTriangle(SDL_Renderer* renderer, Triangle triangle, Camera camera){
             SDL_RenderDrawPoint(renderer, i, j);
         }
     }
+    
+    //resetColor(triangle.first);
+    //resetColor(triangle.second);
+    //resetColor(triangle.third);
     
     free(points);
 }
