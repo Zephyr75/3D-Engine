@@ -59,8 +59,8 @@ int main(int argc, char* argv[])
             mesh->trianglesCount = 8;
             Mesh* mesh2 = readObj("resources/suzanne.obj");
 
-            Light light = {-50, 0, -100, 70, whiteColor()};
-            Light light2 = {100, 0, -50, 50, whiteColor()};
+            Light light = {-50, 0, -100, 50, whiteColor()};
+            Light light2 = {100, 0, -50, 30, whiteColor()};
             //SDL_Surface* surface = IMG_Load("resources/brick.jpg");
 
             while (!done) {
