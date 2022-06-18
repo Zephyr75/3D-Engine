@@ -15,4 +15,4 @@ To watch:
 5: light
 6: obj file
 
-Fix number of vertices per summit inconsistent
+Fix number of vertices per summit inconsistent 
